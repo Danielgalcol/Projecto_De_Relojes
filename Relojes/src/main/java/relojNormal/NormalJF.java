@@ -24,6 +24,7 @@ public class NormalJF extends javax.swing.JFrame {
     // programar la hr
     public NormalJF() {
         initComponents();
+        setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
         jL1.setText("00:00:00");
         // iniciar un timer para que se vaya actualizando la hr continuamente
         time = new Timer(1000, (e) -> {

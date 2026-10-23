@@ -30,6 +30,7 @@ public class CronometroF extends javax.swing.JFrame {
      */
     public CronometroF() {
         initComponents();
+        setDefaultCloseOperation(javax.swing.WindowConstants.HIDE_ON_CLOSE);
         modelo = new DefaultListModel<>();
         jLista1.setModel(modelo);
         segs = 00;
