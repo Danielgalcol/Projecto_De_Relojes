@@ -13,11 +13,10 @@ package temporizador;
 
 import javax.swing.SpinnerNumberModel;
 
-public class Controlador_De_Tiempo extends SpinnerNumberModel {
+public class Controlador_De_Horas extends SpinnerNumberModel {
     @Override
     public Object getNextValue() {
         int valor = (int) getValue();
-
         if (valor == 23) {
             return 0;
         }
@@ -28,7 +27,6 @@ public class Controlador_De_Tiempo extends SpinnerNumberModel {
     @Override
     public Object getPreviousValue() {
         int valor = (int) getValue();
-
         if (valor == 0) {
             return 23;
         }

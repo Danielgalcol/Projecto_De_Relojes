@@ -4,7 +4,7 @@
  */
 package temporizador;
 
-import javax.swing.SpinnerModel;
+
 
 
 
@@ -23,7 +23,9 @@ public class Temporizador extends javax.swing.JFrame {
     public Temporizador() {        
         initComponents();
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        jSHrs.setModel(new Controlador_De_Tiempo());
+        jSHrs.setModel(new Controlador_De_Horas());
+        jSMins.setModel(new Controlador_De_MinsYSegs());
+        jSpSegs.setModel(new Controlador_De_MinsYSegs());
     }
 
     /**
@@ -35,37 +37,61 @@ public class Temporizador extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jSMins = new javax.swing.JSpinner();
         jSHrs = new javax.swing.JSpinner();
+        jSpSegs = new javax.swing.JSpinner();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jSMins.setModel(new javax.swing.SpinnerNumberModel(0, 0, 23, 1));
+        jSMins.addChangeListener(this::jSMinsStateChanged);
+
         jSHrs.setModel(new javax.swing.SpinnerNumberModel(0, 0, 23, 1));
+        jSHrs.setEnabled(false);
         jSHrs.addChangeListener(this::jSHrsStateChanged);
+
+        jSpSegs.setModel(new javax.swing.SpinnerNumberModel(0, 0, 23, 1));
+        jSpSegs.addChangeListener(this::jSpSegsStateChanged);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(270, 270, 270)
+                .addGap(278, 278, 278)
                 .addComponent(jSHrs, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(681, Short.MAX_VALUE))
+                .addGap(34, 34, 34)
+                .addComponent(jSMins, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35)
+                .addComponent(jSpSegs, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(318, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(154, 154, 154)
-                .addComponent(jSHrs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(369, Short.MAX_VALUE))
+                .addGap(164, 164, 164)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jSMins, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSpSegs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jSHrs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(359, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jSHrsStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSHrsStateChanged
+    private void jSMinsStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSMinsStateChanged
         // TODO add your handling code here:
                 
+    }//GEN-LAST:event_jSMinsStateChanged
+
+    private void jSHrsStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSHrsStateChanged
+        // TODO add your handling code here:
     }//GEN-LAST:event_jSHrsStateChanged
+
+    private void jSpSegsStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpSegsStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jSpSegsStateChanged
 
     /**
      * @param args the command line arguments
@@ -94,5 +120,7 @@ public class Temporizador extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JSpinner jSHrs;
+    private javax.swing.JSpinner jSMins;
+    private javax.swing.JSpinner jSpSegs;
     // End of variables declaration//GEN-END:variables
 }
