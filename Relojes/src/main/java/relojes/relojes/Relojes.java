@@ -32,26 +32,18 @@ public class Relojes {
             }
             int num = s.nextInt();
             switch (num) {
-                case 1:
-                    cR.setVisible(true);
-                    break;
-                case 2:
-                    reloj.setVisible(true);
-                    break;
-                case 3:
-                    temp.setVisible(true);
-                    break;
-                case 4:
+                case 1 -> cR.setVisible(true);
+                case 2 -> reloj.setVisible(true);
+                case 3 -> temp.setVisible(true);
+                case 4 -> {
                     // cerrar la app
                     cerrado = false;
                     s.close();
                     cR.dispose();
                     reloj.dispose();
                     temp.dispose();
-                    break;
-                default:
-                    System.out.println("Esta opcion no existe, intentelo de nuevo");
-                    break;
+                }
+                default -> System.out.println("Esta opcion no existe, intentelo de nuevo");
             }
         }
     }
