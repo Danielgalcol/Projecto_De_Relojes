@@ -4,28 +4,32 @@
  */
 package temporizador;
 
-
-
-
+import javax.swing.Timer;
 
 /**
  *
  * @author walls
  */
 public class Temporizador extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(Temporizador.class.getName());
-    
+    private int hr;
+    private int sg;
+    private int min;
+    private Timer timer;
 
     /**
      * Creates new form Temporizador
      */
-    public Temporizador() {        
+    public Temporizador() {
         initComponents();
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         jSHrs.setModel(new Controlador_De_Horas());
         jSMins.setModel(new Controlador_De_MinsYSegs());
         jSpSegs.setModel(new Controlador_De_MinsYSegs());
+        hr = (int) jSHrs.getValue();
+        min = (int) jSMins.getValue();
+        sg = (int) jSpSegs.getValue();
     }
 
     /**
@@ -40,41 +44,77 @@ public class Temporizador extends javax.swing.JFrame {
         jSMins = new javax.swing.JSpinner();
         jSHrs = new javax.swing.JSpinner();
         jSpSegs = new javax.swing.JSpinner();
+        jB1 = new javax.swing.JButton();
+        jB2 = new javax.swing.JButton();
+        jL3 = new javax.swing.JLabel();
+        jL2 = new javax.swing.JLabel();
+        jL1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jSMins.setModel(new javax.swing.SpinnerNumberModel(0, 0, 23, 1));
+        jSMins.setModel(new javax.swing.SpinnerNumberModel(1, 1, 59, 1));
         jSMins.addChangeListener(this::jSMinsStateChanged);
 
-        jSHrs.setModel(new javax.swing.SpinnerNumberModel(0, 0, 23, 1));
-        jSHrs.setEnabled(false);
+        jSHrs.setModel(new javax.swing.SpinnerNumberModel(0, 0, 99, 1));
         jSHrs.addChangeListener(this::jSHrsStateChanged);
 
-        jSpSegs.setModel(new javax.swing.SpinnerNumberModel(0, 0, 23, 1));
+        jSpSegs.setModel(new javax.swing.SpinnerNumberModel(1, 1, 59, 1));
         jSpSegs.addChangeListener(this::jSpSegsStateChanged);
+
+        jB1.setText("Start");
+        jB1.addActionListener(this::jB1ActionPerformed);
+
+        jB2.setText("Pause");
+        jB2.addActionListener(this::jB2ActionPerformed);
+
+        jL3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+
+        jL2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+
+        jL1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(278, 278, 278)
-                .addComponent(jSHrs, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
-                .addComponent(jSMins, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
-                .addComponent(jSpSegs, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(318, Short.MAX_VALUE))
+                .addGap(272, 272, 272)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jSHrs)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jL3, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jB1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(32, 32, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jB2, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jL2, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jSMins, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(54, 54, 54)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jL1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jSpSegs, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(297, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(164, 164, 164)
+                .addGap(103, 103, 103)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jSHrs, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jSMins, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSpSegs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSHrs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(359, Short.MAX_VALUE))
+                    .addComponent(jSpSegs, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(103, 103, 103)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jL3, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jL1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jL2, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 121, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jB1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jB2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(90, 90, 90))
         );
 
         pack();
@@ -82,16 +122,67 @@ public class Temporizador extends javax.swing.JFrame {
 
     private void jSMinsStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSMinsStateChanged
         // TODO add your handling code here:
-                
+
     }//GEN-LAST:event_jSMinsStateChanged
 
     private void jSHrsStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSHrsStateChanged
         // TODO add your handling code here:
+
     }//GEN-LAST:event_jSHrsStateChanged
 
     private void jSpSegsStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSpSegsStateChanged
         // TODO add your handling code here:
     }//GEN-LAST:event_jSpSegsStateChanged
+    //boton start
+    private void jB1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB1ActionPerformed
+        // TODO add your handling code here:
+        if (timer != null && timer.isRunning()) {
+            return;
+        }
+        //recoger los valores de los Spinner
+        hr = (int) jSHrs.getValue();
+        min = (int) jSMins.getValue();
+        sg = (int) jSpSegs.getValue();
+        //si no hay un timer
+        if (timer == null) {
+            timer = new Timer(10, (e) -> {
+                //tiene q ir primero para q se compruebe y no de error
+                if (hr == 0 && min == 0 && sg == 0) {
+                    timer.stop();
+                }
+                
+                if (sg == 0 && min > 0) {
+                    min--;
+                    sg = 60;
+                }
+                
+                if(hr>0 && sg == 0 && min == 0){
+                    hr--;
+                    min--;
+                    sg = 60;
+                    min = 59;
+                }
+                sg--;
+                jL1.setText(String.format("%02d", sg));
+                jL2.setText(String.format("%02d", min));
+                jL3.setText(String.format("%02d", hr));
+
+                if (hr == 0 && min == 0 && sg == 0) {
+                    timer.stop();
+                }
+            });
+        }
+        
+
+        timer.start();
+    }//GEN-LAST:event_jB1ActionPerformed
+    //botn pausar
+    private void jB2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB2ActionPerformed
+        // TODO add your handling code here:
+        String hr = jSHrs.getValue().toString();
+        String min = jSMins.getValue().toString();
+        String sg = jSpSegs.getValue().toString();
+    }//GEN-LAST:event_jB2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -119,6 +210,11 @@ public class Temporizador extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jB1;
+    private javax.swing.JButton jB2;
+    private javax.swing.JLabel jL1;
+    private javax.swing.JLabel jL2;
+    private javax.swing.JLabel jL3;
     private javax.swing.JSpinner jSHrs;
     private javax.swing.JSpinner jSMins;
     private javax.swing.JSpinner jSpSegs;
