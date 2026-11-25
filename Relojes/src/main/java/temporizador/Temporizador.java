@@ -30,9 +30,6 @@ public class Temporizador extends javax.swing.JFrame {
         jSMins.setModel(new Controlador_De_MinsYSegs());
         jSpSegs.setModel(new Controlador_De_MinsYSegs());
         lista = new DefaultListModel<>();
-        //hr = (int) jSHrs.getValue();
-        //min = (int) jSMins.getValue();
-        //sg = (int) jSpSegs.getValue();
     }
 
     /**
@@ -54,6 +51,7 @@ public class Temporizador extends javax.swing.JFrame {
         jLSeg = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
+        jB3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -73,12 +71,24 @@ public class Temporizador extends javax.swing.JFrame {
         jB2.addActionListener(this::jB2ActionPerformed);
 
         jLHr.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLHr.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLHr.setText("00");
 
         jLMin.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLMin.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLMin.setText("00");
 
         jLSeg.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLSeg.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLSeg.setText("00");
+        jLSeg.setToolTipText("");
+        jLSeg.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jLSeg.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         jScrollPane1.setViewportView(jList1);
+
+        jB3.setText("Delete");
+        jB3.addActionListener(this::jB3ActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -90,22 +100,30 @@ public class Temporizador extends javax.swing.JFrame {
                     .addComponent(jScrollPane1)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSHrs)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jSHrs)
+                                    .addComponent(jB1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(32, 32, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLHr, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jB1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(32, 32, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jB2, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLMin, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jSMins, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(54, 54, 54)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(jSMins, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
+                                    .addComponent(jLMin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLSeg, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jSpSegs, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addGap(297, 297, 297))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(54, 54, 54)
+                                        .addComponent(jSpSegs, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLSeg, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
+                .addGap(85, 85, 85)
+                .addComponent(jB3, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(74, 74, 74))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -120,9 +138,15 @@ public class Temporizador extends javax.swing.JFrame {
                     .addComponent(jLMin, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLHr, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLSeg, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(35, 35, 35)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 52, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jB3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(79, 79, 79)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jB2, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jB1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -203,10 +227,21 @@ public class Temporizador extends javax.swing.JFrame {
         String min = jLMin.getText();
         String sg = jLSeg.getText();
         String cadena = hr + min + sg;
-        //no se ve pero si se ha añadido
         lista.addElement(cadena);
         jList1.setModel(lista);
     }//GEN-LAST:event_jB2ActionPerformed
+
+    private void jB3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jB3ActionPerformed
+       // TODO add your handling code here:
+       int indB = jList1.getSelectedIndex();
+       
+       if(indB != -1){
+           lista.removeElementAt(indB);
+       }
+       else{
+           System.out.println("Ningun elemento seleccionado");
+       }   
+    }//GEN-LAST:event_jB3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -236,6 +271,7 @@ public class Temporizador extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jB1;
     private javax.swing.JButton jB2;
+    private javax.swing.JButton jB3;
     private javax.swing.JLabel jLHr;
     private javax.swing.JLabel jLMin;
     private javax.swing.JLabel jLSeg;

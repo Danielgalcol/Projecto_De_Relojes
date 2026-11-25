@@ -231,7 +231,7 @@ public class CronometroF extends javax.swing.JFrame {
        int indBorrar = jLista1.getSelectedIndex();
        
        if(indBorrar != -1){
-        modelo.remove(indBorrar);
+        modelo.removeElementAt(indBorrar);
        }
        else{
            System.out.println("Ningun elemento seleccionado");
